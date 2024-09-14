@@ -1,0 +1,25 @@
+version: '3.0'
+
+services:
+  php-member-form:
+    build: .
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 9000:80
+    networks:
+      - default
+
+  mysql_db:
+    image: mysql:8.0.38
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3308:3306
+    networks:
+      - default
+
+networks:
+  default:
